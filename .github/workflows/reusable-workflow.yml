@@ -7,7 +7,7 @@ on:
         required: true
         type: string
     outputs:
-      build-status:
+      build_status:
         description: 'The status of the build process'
         value: ${{ jobs.deploy.outputs.build_status }}
       url:
@@ -18,20 +18,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     outputs:
-      build-status: ${{ steps.build.outputs.build }}
+      build_status: ${{ steps.build.outputs.build }}
       url: ${{ steps.deploy.outputs.url }}
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
       - name: Build
         id: build
         run: |
-          echo "Building using directory ${{ inputs.target_directory }}"
+          echo "Building using directory ${{ inputs.target-directory }}"
           echo "build=success" >> $GITHUB_OUTPUT
-
       - name: Deploy
+        id: deploy
         run: |
           echo "Deploying build artifacts"
           echo "url=https://www.google.com" >> $GITHUB_OUTPUT
